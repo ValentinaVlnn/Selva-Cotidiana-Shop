@@ -37,6 +37,7 @@ async function obtenerProductos() {
 
 obtenerProductos();
 configurarBusquedaPorPrecio();
+configurarOrdenAlfabetico();
 
 function imprimirProductos(array) {
     const contenedor = document.getElementById("productos");
@@ -78,35 +79,73 @@ function imprimirProductos(array) {
 
 function configurarBusquedaPorPrecio() {
     const formulario = document.querySelector("form");
-    const inputBusqueda = document.querySelector('input[type="text"]');
 
     formulario.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        const precioBuscado = Number(inputBusqueda.value.trim());
+        actualizarProductos(true);
+    });
+}
 
-        if (!inputBusqueda.value.trim()) {
-            imprimirProductos(productos);
-            return;
-        }
+function configurarOrdenAlfabetico() {
+    const selectorOrden = document.getElementById("orden-productos");
 
-        if (Number.isNaN(precioBuscado)) {
+    selectorOrden.addEventListener("change", () => {
+        actualizarProductos();
+    });
+}
+
+function actualizarProductos(mostrarError = false) {
+    const productosFiltrados = obtenerProductosFiltrados(mostrarError);
+
+    if (!productosFiltrados) {
+        return;
+    }
+
+    const productosOrdenados = ordenarProductos(productosFiltrados);
+    imprimirProductos(productosOrdenados);
+}
+
+function obtenerProductosFiltrados(mostrarError) {
+    const inputBusqueda = document.querySelector('input[type="text"]');
+    const valorBusqueda = inputBusqueda.value.trim();
+
+    if (!valorBusqueda) {
+        return [...productos];
+    }
+
+    const precioBuscado = Number(valorBusqueda);
+
+    if (Number.isNaN(precioBuscado)) {
+        if (mostrarError) {
             Swal.fire({
                 title: "Dato invalido",
                 text: "Ingresa un numero para buscar por precio.",
                 icon: "warning",
                 confirmButtonText: "Aceptar"
             });
-            return;
         }
 
-        const productosFiltrados = productos.filter((producto) => {
-            const precio = Number(producto.precio.replace(/[^\d]/g, ""));
-            return precio === precioBuscado;
-        });
+        return null;
+    }
 
-        imprimirProductos(productosFiltrados);
+    return productos.filter((producto) => {
+        const precio = Number(producto.precio.replace(/[^\d]/g, ""));
+        return precio === precioBuscado;
     });
+}
+
+function ordenarProductos(listaProductos) {
+    const selectorOrden = document.getElementById("orden-productos");
+    const productosOrdenados = [...listaProductos];
+
+    if (selectorOrden.value === "asc") {
+        productosOrdenados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    } else if (selectorOrden.value === "desc") {
+        productosOrdenados.sort((a, b) => b.nombre.localeCompare(a.nombre));
+    }
+
+    return productosOrdenados;
 }
 
 function AgregarAlCarrito(producto) {

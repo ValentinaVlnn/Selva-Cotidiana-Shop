@@ -63,6 +63,7 @@ form {
 }
 
 form input,
+form select,
 form button {
     border: 2px solid var(--color4);
     border-radius: 12px;
