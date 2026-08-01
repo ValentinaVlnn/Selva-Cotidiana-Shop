@@ -1,6 +1,6 @@
 let carrito = [];
 let productos = [];
-const URL = "../db/data.json";
+const URL = "db/data.json";
 
 try {
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];

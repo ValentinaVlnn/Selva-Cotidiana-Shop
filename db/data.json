@@ -5,34 +5,34 @@
         "nombre": "Potus",
         "descripcion": "planta de interior, facil de cuidar",
         "precio": "$ 100",
-        "imagen": "../img/potus.jpg"
+        "imagen": "img/potus.jpg"
     },
     {
         "id":2,
         "nombre": "Filodendro",
         "descripcion": "lindos detalles y soporta poca luz",
         "precio": "$ 200",
-        "imagen": "../img/filodendro.jpg"
+        "imagen": "img/filodendro.jpg"
     },
     {
         "id":3,
         "nombre": "Cactus",
         "descripcion": "exterior, dejarlo ser",
         "precio": "$ 300",
-        "imagen": "../img/cactus.jpg"
+        "imagen": "img/cactus.jpg"
     },
     {
         "id":4,
         "nombre": "Alegría",
         "descripcion": "Mucha agua, sol y buena onda",
         "precio": "$ 400",
-        "imagen": "../img/alegria.jpg"
+        "imagen": "img/alegria.jpg"
     },
     {
         "id":5,
         "nombre": "Monstera",
         "descripcion": "Siempre al lado de la ventana",
         "precio": "$500",
-        "imagen": "../img/mostera.jpg"
+        "imagen": "img/mostera.jpg"
     }
 ]
